@@ -1,6 +1,8 @@
 # ClauseEase AI
 
-This project implements a local, privacy-preserving document assistant capable of processing PDF and text files, extracting and chunking content, detecting language, and performing summarization, translation, and document-based question answering. The system uses a custom Streamlit UI and the LLaMA 3 model served locally through Ollama. All data remains on the user's machine, enabling secure analysis of private or sensitive documents.
+ClauseEase AI is a local, privacy-preserving document assistant developed as part of the Infosys Springboard Virtual Internship.
+It processes PDF and text files, extracts and chunks content, detects language, and performs summarization, translation, and document-based question answering all running fully offline.
+The system uses a custom Streamlit UI and the LLaMA 3 model served locally through Ollama, ensuring that no data leaves the user’s device and enabling secure handling of sensitive legal documents.
 
 The assistant supports:
 
@@ -16,9 +18,9 @@ The assistant supports:
 
 ## 1. Overview
 
-The motivation behind this project is to provide an offline alternative to cloud-based LLM tools for reading and interpreting documents. By running **LLaMA 3** through **Ollama**, the application avoids external API calls entirely.
+This project was built to demonstrate how offline LLMs can simplify and interpret legal documents without relying on cloud-based APIs.By running **LLaMA 3** through **Ollama**, the application avoids external API calls entirely.
 
-The Streamlit interface supports multi-file uploads, instant previews, file-specific actions, and an interactive chat that streams responses incrementally, closely mirroring modern LLM interfaces.
+The Streamlit interface includes multi-file upload support, instant previews, and an interactive chat that streams responses incrementally, offering a smooth LLM-style user experience.
 
 
 ## 2. Features
@@ -66,7 +68,7 @@ Uploaded files appear in the chat with a preview and confirmation message once f
 
 ## 5. Folder Structure
 ```
-document-assistant/
+ClauseEase-AI/
 │
 ├── app.py # main streamlit application
 ├── requirements.txt # dependencies
