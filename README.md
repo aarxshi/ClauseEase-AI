@@ -10,6 +10,9 @@ The assistant supports:
 - Real-time token streaming from a locally hosted LLM  
 - Document-grounded summarization, translation, and Q&A  
 
+<p align="center">
+<img src="screenshots/ui.png" width="700">
+</p>
 
 ## 1. Overview
 
@@ -18,10 +21,9 @@ The motivation behind this project is to provide an offline alternative to cloud
 The Streamlit interface supports multi-file uploads, instant previews, file-specific actions, and an interactive chat that streams responses incrementally, closely mirroring modern LLM interfaces.
 
 
-## 2. File Processing Pipeline
+## 2. Features
 
 ### PDF Processing
-- Files are identified using header inspection (`%PDF`) to avoid extension-based misclassification.  
 - Text extraction is performed using **PyMuPDF (fitz)**, which provides significantly faster and cleaner results than standard PDF libraries.  
 - A short preview (first ~500 characters) is shown immediately in the chat interface before full extraction completes.  
 
@@ -32,21 +34,12 @@ The Streamlit interface supports multi-file uploads, instant previews, file-spec
 ### Language Detection
 - Detected from the first 500 characters using `langdetect`, enabling translation and customized responses.
 
+### Summarization, Translation, and Document Q&A
+- Summarizes up to 4000 characters into a structured overview.
+- Translates the detected language into natural English.
+- Answers queries using only the uploaded document, enforcing grounding to reduce hallucinations.
 
-## 3. Chunking Strategy
-
-Large documents exceed the context window of most local LLMs.  
-To handle this, the project uses a simple and efficient chunking method:
-
-- Split text into words  
-- Aggregate until reaching ~800 characters per chunk  
-- Store all resulting segments in order  
-- Use these chunks for summarization and document-specific Q&A  
-
-This approach avoids memory overload and maintains coherence without requiring vector databases or embeddings.
-
-
-## 4. Model and Local Inference
+## 3. Model and Local Inference
 
 The assistant uses:
 
@@ -57,7 +50,7 @@ The assistant uses:
 Responses are streamed token-by-token using `iter_lines()`, allowing the UI to update incrementally. The interface displays partial output with a cursor indicator and includes a stop button to interrupt generation.
 
 
-## 5. Streamlit Interface
+## 4. Streamlit Interface
 
 The UI includes:
 
@@ -69,26 +62,9 @@ The UI includes:
 - Per-file storage of full text, chunks, language metadata, and original content  
 
 Uploaded files appear in the chat with a preview and confirmation message once fully processed.
+<p align="center"> <img src="screenshots/pdf_preview.png" width="750"> <br><em>Instant PDF preview extracted using PyMuPDF</em> </p> <p align="center"> <img src="screenshots/translation_output.png" width="750"> <br><em>Document translation generated using LLaMA 3</em> </p
 
-
-## 6. Summarization, Translation, and Q&A
-
-The system supports three file-specific operations:
-
-### Summarization
-Extracts up to 4000 characters and requests a structured summary.
-
-### Translation
-Uses the detected language and translates the original text into natural English.
-
-### Document-grounded Q&A
-Answers questions using only the text from the selected document.  
-The prompt enforces grounding to reduce hallucination.
-
-If no file-specific intent is detected, the model responds in general chat mode.
-
-
-## 7. Folder Structure
+## 5. Folder Structure
 ```
 document-assistant/
 │
@@ -99,7 +75,7 @@ document-assistant/
 │
 └── README.md
 ```
-## 8. Running the Project
+## 6. Running the Project
 
 ### 1. Install Ollama
 Download from:  
